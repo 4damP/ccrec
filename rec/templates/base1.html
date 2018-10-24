@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet"  href="/static/rec/css/bootstrap.min.css">
+<title>{% block title %}Credit Card Reconciliation{% endblock %}</title>
+
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <header>
+      <div class="col-sm">
+        <h1>Credit Card Reconciliation</h1>
+      </div>
+      <div class="col-sm">
+        <div class="navbar navbar-expand-lg navbar-dark text-light bg-dark fixed-top">
+          <ul class="nav nav-tabs">
+            <li><a href="/"><span class="glyphicon-home text-light"></span><h3>  Home</h3></a></li>
+            <li><a class="text-light" href="/depts"><h3>  Depts</h3></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm float-right">
+        <p>search bar</p>
+      </div>
+    </header>
+  </div>
+
+  <div class="row">
+    {% block content %}{% endblock %}
+  </div>
+  <footer>
+    <div class="row bg-dark text-light">
+      <div class="col-sm">
+        <ul class="list-unstyled">
+          <li><a href="#">link1</a></li>
+          <li><a href="#">link1</a></li>
+          <li><a href="#">link1</a></li>
+        </ul>
+      </div>
+      <div class="col-md">
+        <ul class="list-unstyled">
+          <li><a href="#">link1</a></li>
+          <li><a href="#">link1</a></li>
+          <li><a href="#">link1</a></li>
+        </ul>
+
+      </div>
+
+    </div>
+</body>
+</html>

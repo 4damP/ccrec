@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- <link rel="stylesheet"  href="/static/rec/css/bootstrap.css">
+<link rel="stylesheet"  href="/static/rec/css/bootstrap-responsive.css">
+<link rel="stylesheet"  href="/static/rec/css/bootstrap-reboot.css"> -->
+<link rel="stylesheet"  href="/static/rec/css/bootstrap.customize.css">
+<!-- <link rel="stylesheet"  href="/static/rec/css/bootstrap-responsive.min.css"> -->
+<link rel="stylesheet" href="/static/rec/css/style.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<title>{% block title %}Credit Card Reconciliation{% endblock %}</title>
+
+</head>
+<body>
+<div class="container-fluid bg-dark">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/"><b>CCR</b></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/depts">Depts <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/progress">Progress</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/reconcile">Reconcile</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Admin
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="admin/rec/dept" target="_blank">Edit Depts</a>
+              <a class="dropdown-item" href="admin/rec/progress"target="_blank">Edit Progress</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="container-fluid" id="body">
+  <div class="container">
+    <div class="row" id="buffer-top">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+<!-- <div class="bg-dark">
+  <div class="container-fluid pos-f-t fixed-bottom bg-dark">
+    <div class="container">
+      <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+          {% block progress %}{% endblock %}
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+  </div>
+</div> -->
+
+  <div class="row bg-dark text-light fixed-bottom">
+    <div class="container">
+      <div class="col-sm">
+        <ul class="list-unstyled">
+          <li><a href="#">link1</a></li>
+          <li><a href="#">link1</a></li>
+          <li><a href="#">link1</a></li>
+        </ul>
+      </div>
+      <!-- <div class="col-md">
+        <ul class="list-unstyled">
+          <li><a href="#">link1</a></li>
+          <li><a href="#">link1</a></li>
+          <li><a href="#">link1</a></li>
+        </ul>
+      </div> -->
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="/static/rec/js/bootstrap.customize.js"></script>
+<script src="/static/rec/js/bootstrap.customize.js"></script>
+
+</body>
+</html>

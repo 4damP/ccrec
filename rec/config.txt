@@ -1,0 +1,5 @@
+dept = ACCOUNT
+refno = REFNO
+idate = IDATE
+amount = AMOUNT
+journal_type = DEB_CRED
