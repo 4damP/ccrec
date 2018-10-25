@@ -1,6 +1,5 @@
 from datetime import datetime
 
-# from django.text import TestCase
 from rec.models import Transactions, Payments
 
 # import rec.urls

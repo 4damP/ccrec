@@ -9,10 +9,12 @@
 {% block content %}
 <div class="jumbotron text-center">
   <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <h3>Upload Files</h3>
-    {{ form|crispy }}
-    <button type="submit" value="Upload" class="btn btn-success">Upload</button>
+    <fieldset class="module aligned">
+      {% csrf_token %}
+      <h3>Upload Files</h3>
+      {{ form|crispy }}
+      <button type="submit" value="Upload" class="btn btn-success">Upload</button>
+    </fieldset>
   </form>
 
 {% if uploaded_file_url %}

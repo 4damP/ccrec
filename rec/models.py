@@ -13,7 +13,8 @@ class Dept(models.Model):
     tran_type = models.CharField(max_length=1)
 
     def __str__(self):
-        return dept_description
+        # return dept_description
+        pass
 
     def all_depts_dict(self):
         pass

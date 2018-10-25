@@ -1,5 +1,5 @@
-dept = ACCOUNT
-refno = REFNO
-idate = IDATE
-amount = AMOUNT
-journal_type = DEB_CRED
+ACCOUNT = dept
+REFNO = refno
+IDATE = idate
+AMOUNT = amount
+JOURNAL = journal_type
