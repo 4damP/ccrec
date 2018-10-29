@@ -1,0 +1,74 @@
+<columns>
+  <column title="ACCOUNT">
+    <title>ACCOUNT</title>
+    <header>ACCOUNT</header>
+    <table>dept</table>
+    <csv_column>1</csv_column>
+  </column>
+  <column title="REFNO">
+    <title>REFNO</title>
+    <header>REFNO</header>
+    <table>refno</table>
+    <csv_column>5</csv_column>
+  </column>
+  <column title="IDATE">
+    <title>IDATE</title>
+    <header>IDATE</header>
+    <table>idate</table>
+    <csv_column>4</csv_column>
+  </column>
+  <column title="AMOUNT">
+    <title>AMOUNT</title>
+    <header>AMOUNT</header>
+    <table>amount</table>
+    <csv_column>8</csv_column>
+  </column>
+  <column title="JOURNAL">
+    <title>JOURNAL</title>
+    <header>JOURNAL</header>
+    <table>journal_type</table>
+    <csv_column>6</csv_column>
+  </column>
+  <column title="Tran Date">
+    <title>Tran Date</title>
+    <header>Tran Date</header>
+    <table>idate</table>
+    <csv_column>1</csv_column>
+  </column>
+  <column title="Batch Date">
+    <title>Batch Date</title>
+    <header>Batch Date</header>
+    <table>batch_date</table>
+    <csv_column>2</csv_column>
+  </column>
+  <column title="Card Type">
+    <title>Card Type</title>
+    <header>Card Type</header>
+    <table>card_type</table>
+    <csv_column>5</csv_column>
+  </column>
+  <column title="Tran Amount">
+    <title>Tran Amount</title>
+    <header>Tran Amount</header>
+    <table>amount</table>
+    <csv_column>7</csv_column>
+  </column>
+  <column title="Tran Type">
+    <title>Tran Type</title>
+    <header>Tran Type</header>
+    <table>tran_type</table>
+    <csv_column>8</csv_column>
+  </column>
+  <column title="Auth Code">
+    <title>Auth Code</title>
+    <header>Auth Code</header>
+    <table>auth_no</table>
+    <csv_column>11</csv_column>
+  </column>
+  <column title="I/O">
+    <title>I/O</title>
+    <header>I/O</header>
+    <table>I/O</table>
+    <csv_column>10</csv_column>
+  </column>
+</columns>
