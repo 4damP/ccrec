@@ -70,9 +70,18 @@ class ImportData():
                 if each in self.columns[col]:
                     self.columns[col][1] = header.index(each)
 
-    # def ConvertDate(self, idate):
-    #     idate = [int(i) for i in idate.split('/')]
-    #     return datetime.date(idate[2], idate[0], idate[1])
+    def ConvertAmount(self, amount):
+        """Deformat $ amount, remove extra symbols and convert to float."""
+        amt = amount.replace(',', '')
+        try:
+            if amt[0] == '(':
+                amt = amt.strip('()')
+                amt = float('-' + amt.strip('$'))
+            else:
+                amt = float(amt.strip('$'))
+            return amt
+        except ValueError as e:
+            print(str(e))
 
     def ImportAPData(self, filename):
         transactions = {}
@@ -117,16 +126,16 @@ class ImportData():
                 else:
                     try:
                         in_out = line[self.columns['I/O'][1]]
-                        dept = self.merchant_ids[merch_id][in_out]
+                        # dept = self.merchant_ids[merch_id][in_out]
                         idate = datetime.strptime(line[self.columns['Tran Date'][1]],
                                                   '%m/%d/%Y %I:%M:%S %p')
                         batch_date = datetime.strptime(line[self.columns['Batch Date'][1]],
                                                     '%m/%d/%Y')
                         card_type = line[self.columns['Card Type'][1]]
-                        amount = line[self.columns['Tran Amount'][1]]
+                        amount = self.ConvertAmount(line[self.columns['Tran Amount'][1]])
                         tran_type = line[self.columns['Tran Type'][1]]
                         auth_no = line[self.columns['Auth Code'][1]]
-                        transactions += [dept, idate, batch_date, card_type, amount, tran_type, auth_no, in_out]
+                        transactions.append([merch_id, idate, batch_date, card_type, amount, tran_type, auth_no, in_out])
                     except Exception as e:
                         print(str(e))
                         print(line)
