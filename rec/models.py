@@ -1,8 +1,4 @@
 from django.db import models
-# from ImportCHSData import ImportCHSData
-#
-# class MyCsvModel(model):
-#     pass
 
 
 class Dept(models.Model):
@@ -22,7 +18,7 @@ class Dept(models.Model):
 
 class Transactions(models.Model):
     # dept = models.ForeignKey(Depts)
-    dept = models.PositiveSmallIntegerField()
+    dept = models.ForeignKey(Dept, null=True, on_delete=models.PROTECT)
     refno = models.PositiveSmallIntegerField()
     idate = models.DateField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -38,7 +34,7 @@ class Transactions(models.Model):
                  {tran_type}, {auth_no}, {card_type}, {reconciled}, {batch_date}'
 
 class Payments(models.Model):
-    dept = models.PositiveSmallIntegerField()
+    dept = models.ForeignKey(Dept, null=True, on_delete=models.PROTECT)
     refno = models.PositiveSmallIntegerField()
     idate = models.DateField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -60,13 +56,12 @@ class Progress(models.Model):
     closed = models.BooleanField(default=False)
     gl_balance = models.DecimalField(max_digits=10, decimal_places=2)
 
-    # def __str__(self):
-    #     return [self.period, self.import_ap, self.import_chs, self.closed, self.gl_balance]
 
 class UploadDocument(models.Model):
-    description = models.CharField(max_length=255, blank=True)
+    period = models.ForeignKey(Progress, null=True, on_delete=models.PROTECT)
+    type = models.CharField(max_length=255, blank=True)
     docfile = models.FileField(upload_to='imports')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse('/')
+        return reverse('rec')

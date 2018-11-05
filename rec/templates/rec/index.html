@@ -2,7 +2,7 @@
 
 {% block title %}Credit Card Reconciliation{% endblock %}
 
-
+{% load crispy_forms_tags %}
 
 {%block content %}
 
@@ -66,6 +66,7 @@
           <div class="container">
             <form action="" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
+
               <div class="form-group">
                 <label for="select-file">Please select the type of file you would like to upload.</label>
                 <select class="form-control" id="select-file">
@@ -74,9 +75,9 @@
                   <option>CHS Payment Details</option>
                 </select>
               </div>
-              <div class="form-group">
+              <div class="jumbotron text-center">
                 <label for="file-import">Select CSV File <i>(comma separated value)</i> to Upload.</label>
-                <input type="file" class="form-control-file" id="file-import">
+                <input type="file" class="form-control-file" id="file_upload">
               </div>
               <button type="submit" class="btn btn-primary">Upload File</button>
             </form>
@@ -90,13 +91,13 @@
         <div class="card-header" id="headingThree">
           <h5 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              <h3>Reconcile Transactions</h3>
+              <h3>Upload Files</h3>
             </button>
           </h5>
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
           <div class="card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            {% include 'rec/upload_file.html' %}
           </div>
         </div>
       </div>

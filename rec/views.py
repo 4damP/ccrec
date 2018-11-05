@@ -1,52 +1,46 @@
+import os
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.views import generic
-from django.views.generic import CreateView
+from django.views.generic import CreateView, FormView
 from django.views.decorators.http import require_POST
 from django.core.files.storage import FileSystemStorage
 
 from .models import Dept, Progress, Transactions, Payments, UploadDocument
-# from .forms import DocumentForm
-# from .import_data import ImportAPdata
+from .forms import UploadFileForm
 
-def UploadFile(*args, **kwargs):
-    if args:
-        for arg in args:
-            print(arg)
+def handle_uploaded_file(f):
+    print(f)
+    filename = 'period+giftcards+.csv'
+    save_file = os.path.join('media/imports', filename)
+    with open(save_file, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
-@require_POST
-def form_upload(request):
-    save_path = os.path.join(settings.MEDIA_ROOT, 'imports', request.FILES['file'])
-    path = default_storage.save(save_path, request.FILES['file'])
+def upload_file(request):
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
+        form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('/')
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/upload_saved')
     else:
-        form = DocumentForm()
-    return render(request, 'rec/upload.html', {'form': form})
+        form = UploadFileForm()
+    return render(request, 'rec/upload_file.html', {'form': form} )
 
 
-class UploadDocumentView(CreateView):
+class UploadDocument(CreateView):
     model = UploadDocument
-    fields = ('description', 'docfile')
-
-
+    fields = ('period', 'description', 'docfile')
+    template_name = 'rec/upload_saved.html'
+    context_object_name = 'upload_progress_list'
+    def get_queryset(self):
+        return UploadDocument.objects.all()
 
 class AddDept(CreateView):
     model = Dept
     fields = ('dept_no', 'dept_base', 'dept_description', 'merchant_id', 'tran_type')
-
-
-class Upload(generic.ListView):
-    template_name = 'rec/upload.html'
-    context_object_name = 'upload_file_list'
-    def get_queryset(self):
-        files = UploadDocument.objects.order_by('dept_no')
-        return files
-
 
 class IndexView(generic.ListView):
     template_name = 'rec/index.html'
@@ -59,35 +53,6 @@ class IndexView(generic.ListView):
         context = super(IndexView, self).get_context_data(*args, **kwargs)
         context['dept_info_list'] = Dept.objects.order_by('dept_no')
         return context
-    #
-    # def get_apdata_import(self, *args, **kwargs):
-    #     form = PostForm()
-    #     return render(request, 'rec/import_ap.html', {'form': form})
-    #
-    # def simple_upload(request):
-    #     if request.method == 'POST' and request.FILES['myfile']:
-    #         myfile = request.FILES['myfile']
-    #         fs =FileSystemStorage()
-    #         filename = fs.save(myfile.name, myfile)
-    #         uploaded_file_url = fs.url(filename)
-    #         return render(request, 'core/simple_upload.html', {
-    #             'uploaded_file_url': uploaded_file_url
-    #         })
-    #     return render(request, 'core/simple_upload.html')
-
-# class AP_Import(generic.FormView):
-#     def get_queryset(self):
-#         template_name = 'rec/apimport.html'
-#         context_object_name = 'ap_import_form'
-#         return render(request, 'rec/upload.html', {'form': form})
-
-# class FileUpload(generic.ListView):
-#     template_name = 'upload.html'
-#     model = UploadDocument
-#     fields = ['description', 'document']
-#     def get_queryset(self):
-#         form = UploadDocument.objects.order_by('id')
-#         return render('request', 'rec/upload.html')
 
 class DeptView(generic.ListView):
     template_name = 'rec/depts.html'

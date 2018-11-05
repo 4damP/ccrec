@@ -102,38 +102,5 @@ class TestImportMethods(unittest.TestCase):
         self.assertEqual(test_totals[merch_id], amount)
 
 
-    #     transactions = ap.ImportData(path.join(test_data_path, 'TransactionDetail.csv'))
-    #     self.assertEqual(ap.columns['ACCOUNT'][1], 0)
-    #     self.assertEqual(ap.columns['IDATE'][1], 3)
-    #     self.assertEqual(ap.columns['REFNO'][1], 4)
-    #     self.assertEqual(ap.columns['JOURNAL'][1], 5)
-    #     self.assertEqual(ap.columns['AMOUNT'][1], 7)
-    #
-    #
-    # def test_chsdata(self):
-    #     test_data_path = '/home/adam/projects/cc_rec/test_data'
-    #     ap = ImportCHSdata()
-    #     transactions = ap.ImportData(path.join(test_data_path, 'TransactionDetail.csv'))
-    #     trans_list=[
-    #         ['070009-000', '7/30/2018', 'WEX', 77.35, 'Sale', 'O', '236186'],
-    #         ['800641-000', '8/30/2018', 'VSO', 12.25, 'Sale', 'O', '239251'],
-    #         ]
-    #     for each in trans_list:
-    #         tr = transactions[each[0]][each[1]]
-    #         tr[0] = f'{round(float(tr[0]),2):.2f}'
-    #         test_amount = f'{each[2]:.2f}'
-    #         test_date = each[3]
-    #         journal = each[4]
-    #         card_type = each[5]
-    #         self.assertEqual(tr, [test_amount, test_date, journal, card_type])
-
-
-
-# from .models import Dept
-#
-# class DeptTestCase(TestCase):
-#     def setUp(self):
-#         Dept.objects.
-
 if __name__ == '__main__':
      unittest.main()

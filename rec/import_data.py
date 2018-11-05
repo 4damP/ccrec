@@ -8,11 +8,14 @@ import xml.dom.minidom
 # from .models import Dept
 
 class ImportData():
+    """
+    Import data from csv files for credit card sales, gift card recharges,
+    and payments for transactions.
+    """
+
     def __init__(self):
         # configuration dictionaries to be stored in an xml file
         self.columns = self.GetColumnReference('config.xml')
-        # for each in self.columns:
-        #     print(each, self.columns[each])
         # implement ORM to get merchant id dictionary
         self.merchant_ids = {'070009-000': {'I': 80, 'O': 82},\
                              '070009-001': {'I': 80, 'O': 82},\
@@ -27,7 +30,7 @@ class ImportData():
                              '070130-000': {'I': 10, 'O': 12},\
                              '071423-000': {'I': 40, 'O': 42},\
                              '071546-000': {'I': 60, 'O': 62},\
-                     }# self.GetMerchantIds()
+                     }
 
     def GetDeptsDict(self):
         try:
@@ -35,18 +38,6 @@ class ImportData():
             return
         except Exception as e:
             print(str(e))
-
-    def GetMerchantIds(self):
-        """
-        Dictionary to lookup dept number via merchant id.
-        """
-
-
-    def GetHeaderRows(self):
-        """
-        Read from csv_config.xml to determine which row is the headerself.
-        """
-        pass
 
     def GetColumnReference(self, filename):
         '''
@@ -111,12 +102,9 @@ class ImportData():
         transactions = []
         with open(filename, 'r', encoding='utf-8-sig') as filename:
             c_reader = csv.reader(filename, dialect = "excel")
-            # skip_list = ['', 'T', 'B', '"', ',', 'W', 'G', 'R', 'P', ' ', 'D']
             skip_list = ['B', 'D', 'W', 'G', 'R', 'P']
             chs_dict = {}
             for line in c_reader:
-                # if line[0].split(' ')[0] == 'Downgrade':
-                #     break
                 if not line[0] or line[0][0] in skip_list or line[0] == 'Transaction Detail':
                     continue
                 elif line[0].replace(' ', '').strip(':') in self.merchant_ids.keys():
@@ -126,7 +114,6 @@ class ImportData():
                 else:
                     try:
                         in_out = line[self.columns['I/O'][1]]
-                        # dept = self.merchant_ids[merch_id][in_out]
                         idate = datetime.strptime(line[self.columns['Tran Date'][1]],
                                                   '%m/%d/%Y %I:%M:%S %p')
                         batch_date = datetime.strptime(line[self.columns['Batch Date'][1]],
