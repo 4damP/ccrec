@@ -79,11 +79,14 @@ class TestImportMethods(unittest.TestCase):
         transactions = chs.ImportCHSData(path.join(test_data_path, 'TransactionDetail.csv'))
         trans_totals = {}
         for trans in transactions:
-            # print(trans[0], trans_totals)
+            try:
+                amount = float(trans[4])
+            except Exception as e:
+                print('Exception: ', str(e))
             if trans[0] not in trans_totals:
-                trans_totals[trans[0]] = trans[4]
+                trans_totals[trans[0]] = amount
             else:
-                trans_totals[trans[0]] += trans[4]
+                trans_totals[trans[0]] += amount
         test_totals = {'070130-000': 49434.13,
                        '071423-000': 105891.87,
                        '071546-000': 282445.95,

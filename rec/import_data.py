@@ -63,13 +63,12 @@ class ImportData():
 
     def ConvertAmount(self, amount):
         """Deformat $ amount, remove extra symbols and convert to float."""
-        amt = amount.replace(',', '')
+        # amt = amount.replace(',', '')
         try:
-            if amt[0] == '(':
-                amt = amt.strip('()')
-                amt = float('-' + amt.strip('$'))
+            if amount[0] == '(':
+                amt = -1 * (float(amount.strip('()').strip('$').replace(',', '')))
             else:
-                amt = float(amt.strip('$'))
+                amt = float(amount.strip('$').replace(',', ''))
             return amt
         except ValueError as e:
             print(str(e))

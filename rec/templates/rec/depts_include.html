@@ -1,0 +1,33 @@
+<div class="col-12">
+  <a href="admin/rec/dept" target="_blank"><h5>Manage Departments</h5></a>
+  <!-- <button type="button" class="btn btn-lg btn-primary-outline"><a href="admin/rec/depts"><h4>Manage Departments</h4></a></button> #}-->
+
+</div>
+<div class="col-12">
+  <h1>{{ section.title }}</h1>
+  <div class="top-buffer">
+    {% if dept_info_list %}
+      <table id="dept" class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>Dept No</th>
+          <th>Base Dept</th>
+          <th>Dept Description</th>
+          <th>Merchant ID</th>
+          <th>Tran Type</th>
+        </tr>
+        {% for dept in dept_info_list %}
+          <tr>
+            <td>{{ dept.dept_no }}</td>
+            <td>{{ dept.dept_base}}</td>
+            <td>{{ dept.dept_description }}</td>
+            <td>{{ dept.merchant_id }}</td>
+            <td>{{ dept.tran_type }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p class="">Department information not available.</p>
+    {% endif %}
+  </div>
+</div>

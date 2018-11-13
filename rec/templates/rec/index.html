@@ -2,7 +2,7 @@
 
 {% block title %}Credit Card Reconciliation{% endblock %}
 
-{% load crispy_forms_tags %}
+
 
 {%block content %}
 
@@ -20,36 +20,7 @@
 
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-          <div class="container bg-light">
-            <h1>{{ section.title }}</h1>
-
-            <div class="dept_list">
-              {% if progress_info_list %}
-                <table id="progress" class="table">
-                  <thead class="thead-dark">
-                  <tr>
-                    <th>Period</th>
-                    <th>Accounts Plus Import</th>
-                    <th>CHS Import</th>
-                    <th>Period Closed</th>
-                    <th>GL Balance</th>
-                  </tr>
-
-                  {% for item in progress_info_list %}
-                    <tr>
-                      <td>{{ item.period }}</td>
-                      <td>{{ item.import_ap }}</td>
-                      <td>{{ item.import_chs }}</td>
-                      <td>{{ item.closed }}</td>
-                      <td>{{ item.gl_balance }}</td>
-                    </tr>
-                  {% endfor %}
-                </table>
-              {% else %}
-                <p>No information on Progress is available.</p>
-              {% endif %}
-            </div>
-          </div>
+          {% include "rec/progress_include.html" %}
         </div>
       </div>
     </div>
@@ -57,47 +28,24 @@
       <div class="card-header" id="headingTwo">
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            <h3>Import Data</h3>
+            <h3>Reports</h3>
           </button>
         </h5>
       </div>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
         <div class="card-body">
-          <div class="container">
-            <form action="" method="POST" enctype="multipart/form-data">
-              {% csrf_token %}
-
-              <div class="form-group">
-                <label for="select-file">Please select the type of file you would like to upload.</label>
-                <select class="form-control" id="select-file">
-                  <option>Accounts Plus 121000</option>
-                  <option>Accounts Plus 208100</option>
-                  <option>CHS Payment Details</option>
-                </select>
-              </div>
-              <div class="jumbotron text-center">
-                <label for="file-import">Select CSV File <i>(comma separated value)</i> to Upload.</label>
-                <input type="file" class="form-control-file" id="file_upload">
-              </div>
-              <button type="submit" class="btn btn-primary">Upload File</button>
-            </form>
-            {% if uploaded_file_url %}
-              <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-            {% endif %}
-          </div>
         </div>
       </div>
       <div class="card">
         <div class="card-header" id="headingThree">
           <h5 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              <h3>Upload Files</h3>
+              <h3>Reports</h3>
             </button>
           </h5>
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
           <div class="card-body">
-            {% include 'rec/upload_file.html' %}
           </div>
         </div>
       </div>
@@ -126,158 +74,11 @@
       </div>
       <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
         <div class="card-body">
-          <div class="col-12">
-            <a href="admin/rec/dept" target="_blank"><h5>Manage Departments</h5></a>
-            <!-- <button type="button" class="btn btn-lg btn-primary-outline"><a href="admin/rec/depts"><h4>Manage Departments</h4></a></button> #}-->
-
-          </div>
-          <div class="col-12">
-            <h1>{{ section.title }}</h1>
-            <div class="top-buffer">
-              {% if dept_info_list %}
-                <table id="dept" class="table">
-                  <thead class="thead-dark">
-                  <tr>
-                    <th>Dept No</th>
-                    <th>Base Dept</th>
-                    <th>Dept Description</th>
-                    <th>Merchant ID</th>
-                    <th>Tran Type</th>
-                  </tr>
-                  {% for dept in dept_info_list %}
-                    <tr>
-                      <td>{{ dept.dept_no }}</td>
-                      <td>{{ dept.dept_base}}</td>
-                      <td>{{ dept.dept_description }}</td>
-                      <td>{{ dept.merchant_id }}</td>
-                      <td>{{ dept.tran_type }}</td>
-                    </tr>
-                  {% endfor %}
-                </table>
-              {% else %}
-                <p class="">Department information not available.</p>
-              {% endif %}
-            </div>
-          </div>
+          {% include "rec/depts_include.html" %}
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- <div class="container" id="main-contents">
-  <button class="btn btn-lg btn-success">
-<span class="glyphicon glyphicons-115-list"></span>
- <h1>DashBoard</h1></button>
-</div>
-<div class="container" id="cards">
-  <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <div class="card" id="import-card1">
-        <div class="card-body">
-          <h5 class="card-title">Accounts Plus</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Credit Card Sales</h6>
-          <p class="card-text">Are you ready to upload your files?</p>
-          <a href="#" class="card-link">Upload Credit Card Sales</a>
-          <a href="#" class="card-link">Upload Gift Card Sales</a>
-        </div>
-      </div>
-      </div>
-        <div class="col-sm-12 col-md-6">
-          <div class="card" id="import-card2">
-            <div class="card-body">
-              <h5 class="card-title">CHS Inc.</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Credit Card Sales</h6>
-              <p class="card-text">Are you ready to upload your files?</p>
-              <a href="#" class="card-link">Upload Credit Card Payments</a>
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <h2>Import Data</h2>
-  <ul class="nav nav-pills nav-fill">
-    <li class="nav-item">
-      <a class="nav-link active" href="#import-ap121" data-toggle="tab">Accounts Plus [ 121000 ]</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#import-ap208" data-toggle="tab">Accounts Plus  [ 208100 ]</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#import-chs" data-toggle="tab">CHS Data</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#" data-toggle="tab">Disabled</a>
-    </li>
-  </ul>
-
-  <div class="tab-content">
-    <div id="import-ap121" class="tab-pane fade in active">
-      <h4>Import Accounts Plus Data</h4>
-      <form>
-        <div class="form-group">
-          <label for="exampleFormControlFile1">Example file input</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1">
-        </div>
-      </form>
-    </div>
-    <div id="import-ap208" class="tab-pane fade in">
-      <h3>Import Accounts Plus Data [ 208100 ]</h3>
-      <form>
-        <div class="form-group">
-          <label for="exampleFormControlFile1">Example file input</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1">
-        </div>
-      </form>
-    </div>
-    <div id="import-chs" class="tab-pane fade in">
-      <h3>Import CHS Data</h3>
-      <form>
-        <div class="form-group">
-          <label for="exampleFormControlFile1">Example file input</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
--->
-
-{% endblock %}
-
-{% block progress %}
-<div class="container bg-light">
-  <h1>{{ section.title }}</h1>
-
-  <div class="dept_list">
-    <h1>Progress</h1>
-    {% if progress_info_list %}
-      <table id="progress" class="table">
-        <thead class="thead-dark">
-        <tr>
-          <th>Period</th>
-          <th>Accounts Plus Import</th>
-          <th>CHS Import</th>
-          <th>Period Closed</th>
-          <th>GL Balance</th>
-        </tr>
-
-        {% for item in progress_info_list %}
-          <tr>
-            <td>{{ item.period }}</td>
-            <td>{{ item.import_ap }}</td>
-            <td>{{ item.import_chs }}</td>
-            <td>{{ item.closed }}</td>
-            <td>{{ item.gl_balance }}</td>
-          </tr>
-        {% endfor %}
-      </table>
-    {% else %}
-      <p>No information on Progress is available.</p>
-    {% endif %}
-  </div>
-</div>
 {% endblock %}

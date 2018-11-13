@@ -1,0 +1,32 @@
+<div class="container bg-light">
+  <h1>{{ section.title }}</h1>
+
+  <div class="dept_list">
+    {% if progress_info_list %}
+      <table id="progress" class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>Period Ending</th>
+          <th>CC Sales Import</th>
+          <th>Gift Card Import</th>
+          <th>CHS Import</th>
+          <th>Period Closed</th>
+          <th>GL Balance</th>
+        </tr>
+
+        {% for item in progress_info_list %}
+          <tr>
+            <td>{{ item.period }}</td>
+            <td>{{ item.import_ap }}</td>
+            <td>{{ item.import_gc }}
+            <td>{{ item.import_chs }}</td>
+            <td>{{ item.closed }}</td>
+            <td>{{ item.gl_balance }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>No information on Progress is available.</p>
+    {% endif %}
+  </div>
+</div>

@@ -44,3 +44,23 @@ table, th, tr, td{
 #edit-dept li {
   margin-top: 15px;
 }
+
+.col-12 {
+  padding-bottom: 50px;
+}
+
+.list-unstyled li {
+  display: inline;
+  color: #fff;
+  text-align: center;
+}
+
+.list-unstyled a {
+  color: #efefef;
+}
+
+#upload_form {
+  max-width: 400px;
+  text-align: center;
+  margin: 100px;
+}
